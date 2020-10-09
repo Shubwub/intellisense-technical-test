@@ -1,5 +1,9 @@
-.testGraph {
-  width: 500px;
-  height: 500px;
-  border: 1px solid red;
+@import '../../variables.scss';
+
+.graph {
+	width: 55%;
+  padding: 15px 0;
+  @media screen and (max-width: $medium) {
+    width: 100%;
+  }
 }
