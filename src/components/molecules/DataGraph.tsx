@@ -2,16 +2,28 @@ import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
+import styles from "./Graph.module.scss";
+
 export default function DataGraph({ data }: { data: any }) {
 	const options: Highcharts.Options = {
 		title: {
 			text: "",
 		},
+		legend: {
+			enabled: false,
+		},
 		yAxis: {},
 		xAxis: {
+			tickPositions: data[0].times,
 			title: {
 				text: "time",
 			},
+			labels: {
+				step: 1,
+			},
+		},
+		credits: {
+			enabled: false,
 		},
 		series: data.map((sample: any) => {
 			return {
@@ -24,5 +36,9 @@ export default function DataGraph({ data }: { data: any }) {
 		}),
 	};
 
-	return <HighchartsReact highcharts={Highcharts} options={options} />;
+	return (
+		<div className={styles.graph}>
+			<HighchartsReact highcharts={Highcharts} options={options} />
+		</div>
+	);
 }
