@@ -5,9 +5,7 @@ import { GraphicContainer } from "./components/organisms";
 function App() {
 	return (
 		<div className="App">
-			<header className="App-header">
-				<GraphicContainer />
-			</header>
+			<GraphicContainer />
 		</div>
 	);
 }
