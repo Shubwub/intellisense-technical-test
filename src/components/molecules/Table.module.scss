@@ -1,0 +1,70 @@
+@import "../../variables.scss";
+
+.table {
+	width: 45%;
+	height: 100%;
+	overflow-y: scroll;
+	font-size: 16px;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	@media screen and (max-width: $medium) {
+		width: 100%;
+		height: 300px;
+	}
+}
+
+.leftTableCell {
+	width: 65%;
+	@media screen and (max-width: $small) {
+		width: 50%;
+	}
+}
+
+.rightTableCell {
+	width: 35%;
+	@media screen and (max-width: $small) {
+		width: 50%;
+	}
+}
+
+.tableHead {
+	background-color: $main-colour;
+	color: white;
+	padding: 10px 0px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.tableHeadData {
+	padding: 10px;
+}
+
+.tableBody {
+	max-height: 100%;
+	height: 100%;
+}
+
+.tableRow {
+	display: flex;
+	border-bottom: 1px solid $main-colour;
+	transition: ease-in-out 0.2s;
+	cursor: pointer;
+	&:hover {
+		background-color: $main-colour;
+		color: white;
+		transition: ease-in-out 0.2s;
+	}
+}
+
+.leftData {
+	text-align: left;
+}
+
+.tableData {
+	padding: 5px 20px;
+	box-sizing: border-box;
+	@media screen and (max-width: $small) {
+		text-align: center;
+	}
+}
