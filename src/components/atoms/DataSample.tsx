@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "../molecules/Table.module.scss";
 
 export default function DataSample({
@@ -6,21 +6,20 @@ export default function DataSample({
 	index,
 	addToGraph,
 	removeFromGraph,
+	selected,
 }: {
 	sample: any;
 	index: number;
 	addToGraph: any;
 	removeFromGraph: any;
+	selected: boolean;
 }) {
-	const [selected, toggleSelected] = useState<boolean>(false);
-
 	return (
 		<li
 			className={`${styles.tableRow} ${selected && styles.selectedRow}`}
 			key={index}
 			onClick={() => {
 				selected ? removeFromGraph(sample.name) : addToGraph(sample);
-				toggleSelected(!selected);
 			}}
 		>
 			<div
