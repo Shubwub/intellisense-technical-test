@@ -1,10 +1,17 @@
 import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import emptyGraph from "../../assets/images/emptyGraph.svg";
 
 import styles from "./Graph.module.scss";
 
-export default function DataGraph({ data }: { data: any }) {
+export default function DataGraph({
+	data,
+	setGraphData,
+}: {
+	data: any;
+	setGraphData: any;
+}) {
 	const options: Highcharts.Options = data.length
 		? {
 				title: {
@@ -41,9 +48,25 @@ export default function DataGraph({ data }: { data: any }) {
 	return (
 		<div className={styles.graph}>
 			{data.length ? (
-				<HighchartsReact highcharts={Highcharts} options={options} />
+				<>
+					<button
+						className={styles.clearGraph}
+						onClick={() => setGraphData([])}
+					>
+						clear graph
+					</button>
+					<HighchartsReact
+						containerProps={{ style: { width: "100%", height: "100%" } }}
+						highcharts={Highcharts}
+						options={options}
+					/>
+				</>
 			) : (
-				<p>no data</p>
+				<img
+					src={emptyGraph}
+					className={styles.emptyGraph}
+					alt="graph empty, select items to populate graph."
+				/>
 			)}
 		</div>
 	);

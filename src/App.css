@@ -1,6 +1,6 @@
 .App {
 	text-align: center;
-	background-color: #FFF;
+	background-color: #fff;
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
@@ -8,4 +8,9 @@
 	justify-content: center;
 	font-size: calc(10px + 2vmin);
 	color: gray;
+}
+
+.error {
+	width: 250px;
+	height: 250px;
 }
