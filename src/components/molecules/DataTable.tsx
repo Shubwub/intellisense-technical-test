@@ -1,7 +1,24 @@
 import React from "react";
 import styles from "./Table.module.scss";
+import DataSample from "../atoms/DataSample";
 
-export default function DataTable({ data }: { data: any[] }) {
+export default function DataTable({
+	data,
+	graphData,
+	setGraphData,
+}: {
+	data: any[];
+	graphData: any[];
+	setGraphData: any;
+}) {
+	const addToGraph = (sample: any) => {
+		setGraphData([...graphData, sample]);
+	};
+
+	const removeFromGraph = (deleted: string) => {
+		setGraphData(graphData.filter((data) => data.name !== deleted));
+	};
+
 	return (
 		<ul className={styles.table}>
 			<li style={{ display: "flex" }}>
@@ -13,16 +30,12 @@ export default function DataTable({ data }: { data: any[] }) {
 				</div>
 			</li>
 			{data.map((sample, index) => (
-				<li className={styles.tableRow} key={index}>
-					<div
-						className={`${styles.tableData} ${styles.leftTableCell} ${styles.leftData}`}
-					>
-						{sample.name}
-					</div>
-					<div className={`${styles.tableData} ${styles.rightTableCell}`}>
-						{sample.values[sample.values.length - 1]}
-					</div>
-				</li>
+				<DataSample
+					sample={sample}
+					index={index}
+					addToGraph={addToGraph}
+					removeFromGraph={removeFromGraph}
+				/>
 			))}
 		</ul>
 	);

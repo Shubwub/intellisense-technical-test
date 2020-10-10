@@ -7,7 +7,7 @@ import styles from "./GraphicContainer.module.scss";
 
 export default function GraphicContainer() {
 	const [data, setData] = useState<DataSampleInterface[]>([]);
-	console.log(data[0]);
+	const [graphData, setGraphData] = useState<DataSampleInterface[]>([]);
 
 	const fetchData = async () => {
 		const data = await getData();
@@ -22,8 +22,8 @@ export default function GraphicContainer() {
 		<main className={styles.infographic}>
 			{data.length && (
 				<>
-					<DataTable data={data} />
-					<DataGraph data={data} />
+					<DataTable data={data} graphData={graphData} setGraphData={setGraphData}/>
+					<DataGraph data={graphData} />
 				</>
 			)}
 		</main>

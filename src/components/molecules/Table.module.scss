@@ -68,3 +68,13 @@
 		text-align: center;
 	}
 }
+
+.selectedRow {
+	background-color: $main-colour;
+	transition: ease-in-out 0.2s;
+	color: white;
+	&:hover {
+		background-color: $delete-colour;
+		transition: ease-in-out 0.2s;
+	}
+}
