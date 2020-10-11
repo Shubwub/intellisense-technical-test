@@ -3,16 +3,17 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import emptyGraph from "../../assets/images/emptyGraph.svg";
 
+import { useSelector, useDispatch } from "react-redux";
+import { setGraph } from "../../redux/actions";
+
 import styles from "./Graph.module.scss";
 
-export default function DataGraph({
-	data,
-	setGraphData,
-}: {
-	data: any;
-	setGraphData: any;
-}) {
-	const options: Highcharts.Options = data.length
+export default function DataGraph() {
+	const { graph } = useSelector((state: any) => state.data);
+
+	const dispatch = useDispatch();
+
+	const options: Highcharts.Options = graph.length
 		? {
 				title: {
 					text: "",
@@ -22,7 +23,7 @@ export default function DataGraph({
 				},
 				yAxis: {},
 				xAxis: {
-					tickPositions: data[0].times,
+					tickPositions: graph[0].times,
 					title: {
 						text: "time",
 					},
@@ -33,7 +34,7 @@ export default function DataGraph({
 				credits: {
 					enabled: false,
 				},
-				series: data.map((sample: any) => {
+				series: graph.map((sample: any) => {
 					return {
 						type: "line",
 						data: sample.times.map((time: any, index: number) => {
@@ -47,11 +48,11 @@ export default function DataGraph({
 
 	return (
 		<div className={styles.graph}>
-			{data.length ? (
+			{graph.length ? (
 				<>
 					<button
 						className={styles.clearGraph}
-						onClick={() => setGraphData([])}
+						onClick={() => dispatch(setGraph([]))}
 					>
 						clear graph
 					</button>

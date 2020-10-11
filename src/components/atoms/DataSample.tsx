@@ -1,25 +1,28 @@
 import React from "react";
 import styles from "../molecules/Table.module.scss";
 
+import { useDispatch } from "react-redux";
+import { addData, removeData } from "../../redux/actions";
+
 export default function DataSample({
 	sample,
 	index,
-	addToGraph,
-	removeFromGraph,
 	selected,
 }: {
 	sample: any;
 	index: number;
-	addToGraph: any;
-	removeFromGraph: any;
 	selected: boolean;
 }) {
+	const dispatch = useDispatch();
+
 	return (
 		<li
 			className={`${styles.tableRow} ${selected && styles.selectedRow}`}
 			key={index}
 			onClick={() => {
-				selected ? removeFromGraph(sample.name) : addToGraph(sample);
+				selected
+					? dispatch(removeData(sample.name))
+					: dispatch(addData(sample));
 			}}
 		>
 			<div
