@@ -1,28 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./Table.module.scss";
 import DataSample from "../atoms/DataSample";
 import ChevronIcon from "../atoms/ChevronIcon";
 
-export default function DataTable({
-	data,
-	setData,
-	graphData,
-	setGraphData,
-}: {
-	data: any[];
-	setData: any;
-	graphData: any[];
-	setGraphData: any;
-}) {
-	const addToGraph = (sample: any) => {
-		setGraphData([...graphData, sample]);
-	};
+import { useSelector, useDispatch } from "react-redux";
+import { sortData, setSort } from "../../redux/actions";
 
-	const removeFromGraph = (deleted: string) => {
-		setGraphData(graphData.filter((data) => data.name !== deleted));
-	};
-
-	const [sorted, setSorted] = useState<string>("");
+export default function DataTable() {
+	const { table, graph } = useSelector((state: any) => state.data);
+	const { sortBy } = useSelector((state: any) => state.status);
+	const dispatch = useDispatch();
 
 	return (
 		<ul className={styles.table}>
@@ -30,74 +17,40 @@ export default function DataTable({
 				<div
 					className={`${styles.tableHead} ${styles.leftTableCell}`}
 					onClick={() => {
-						// useState will not pick up a change if array is not cloned before sort
-						if (sorted === "stringASC") {
-							setData(
-								[...data].sort((a: any, b: any) => {
-									const aName = a.name.toUpperCase();
-									const bName = b.name.toUpperCase();
-									if (aName > bName) {
-										return -1;
-									}
-									return 1;
-								})
-							);
-							setSorted("stringDESC");
+						if (sortBy === "stringASC") {
+							dispatch(sortData("stringDESC"));
+							dispatch(setSort("stringDESC"));
 						} else {
-							setData(
-								[...data].sort((a: any, b: any) => {
-									const aName = a.name.toUpperCase();
-									const bName = b.name.toUpperCase();
-									if (aName < bName) {
-										return -1;
-									}
-									return 1;
-								})
-							);
-							setSorted("stringASC");
+							dispatch(sortData("stringASC"));
+							dispatch(setSort("stringASC"));
 						}
 					}}
 				>
 					Metric
-					<ChevronIcon sorted={sorted} type="string" />
+					<ChevronIcon sorted={sortBy} type="string" />
 				</div>
 				<div
 					className={`${styles.tableHead} ${styles.rightTableCell}`}
 					onClick={() => {
-						// useState will not pick up a change if array is not cloned before sort
-						if (sorted === "numberASC") {
-							setData(
-								[...data].sort(
-									(a: any, b: any) =>
-										b.values[b.values.length - 1] -
-										a.values[a.values.length - 1]
-								)
-							);
-							setSorted("numberDESC");
+						if (sortBy === "numberASC") {
+							dispatch(sortData("numberDESC"));
+							dispatch(setSort("numberDESC"));
 						} else {
-							setData(
-								[...data].sort(
-									(a: any, b: any) =>
-										a.values[a.values.length - 1] -
-										b.values[b.values.length - 1]
-								)
-							);
-							setSorted("numberASC");
+							dispatch(sortData("numberASC"));
+							dispatch(setSort("numberASC"));
 						}
 					}}
 				>
 					Value
-					<ChevronIcon sorted={sorted} type="number" />
+					<ChevronIcon sorted={sortBy} type="number" />
 				</div>
 			</li>
-			{data.map((sample, index) => (
+			{table.map((sample: any, index: any) => (
 				<DataSample
 					sample={sample}
 					index={index}
 					// array.some is O(log n) whereas map/filter are O(n)
-					selected={graphData.some((data) => data.name === sample.name)}
-					addToGraph={addToGraph}
-					removeFromGraph={removeFromGraph}
+					selected={graph.some((data: any) => data.name === sample.name)}
 				/>
 			))}
 		</ul>
