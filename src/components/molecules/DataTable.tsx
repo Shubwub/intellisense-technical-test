@@ -25,6 +25,7 @@ export default function DataTable() {
 							dispatch(setSort("stringASC"));
 						}
 					}}
+					data-name="metric-sort"
 				>
 					Metric
 					<ChevronIcon sorted={sortBy} type="string" />
@@ -40,6 +41,7 @@ export default function DataTable() {
 							dispatch(setSort("numberASC"));
 						}
 					}}
+					data-name="value-sort"
 				>
 					Value
 					<ChevronIcon sorted={sortBy} type="number" />

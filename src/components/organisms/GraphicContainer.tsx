@@ -42,6 +42,7 @@ export default function GraphicContainer() {
 					src={errorIcon}
 					className="error"
 					alt="Error collecting data. Please try again."
+					data-name="error"
 				/>
 			);
 		} else if (loading) {
