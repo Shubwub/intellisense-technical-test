@@ -53,6 +53,8 @@ export default function DataGraph() {
 					<button
 						className={styles.clearGraph}
 						onClick={() => dispatch(setGraph([]))}
+						data-name="clearGraph"
+						id="clear-graph"
 					>
 						clear graph
 					</button>
@@ -67,6 +69,7 @@ export default function DataGraph() {
 					src={emptyGraph}
 					className={styles.emptyGraph}
 					alt="graph empty, select items to populate graph."
+					data-name="emptyGraph"
 				/>
 			)}
 		</div>

@@ -27,10 +27,14 @@ export default function DataSample({
 		>
 			<div
 				className={`${styles.tableData} ${styles.leftTableCell} ${styles.leftData}`}
+				data-name="sample-name"
 			>
 				{sample.name}
 			</div>
-			<div className={`${styles.tableData} ${styles.rightTableCell}`}>
+			<div
+				className={`${styles.tableData} ${styles.rightTableCell}`}
+				data-name="sample-value"
+			>
 				{sample.values[sample.values.length - 1]}
 			</div>
 		</li>
