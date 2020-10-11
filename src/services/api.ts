@@ -12,6 +12,8 @@ export const getData = async () => {
     for (let key in pt2) {
       if (/^RD:647/.test(key)) samples.push({ name: key, times: pt2[key].times, values: pt2[key].values })
     }
+    // eslint-disable-next-line no-throw-literal
+    if (pt2.status) throw 'API ERROR';
     return samples;
   } catch (e) {
     throw e;
