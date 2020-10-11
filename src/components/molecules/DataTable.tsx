@@ -6,9 +6,11 @@ import ChevronIcon from "../atoms/ChevronIcon";
 import { useSelector, useDispatch } from "react-redux";
 import { sortData, setSort } from "../../redux/actions";
 
+import { DataSampleInterface, TopState } from "../../interfaces";
+
 export default function DataTable() {
-	const { table, graph } = useSelector((state: any) => state.data);
-	const { sortBy } = useSelector((state: any) => state.status);
+	const { table, graph } = useSelector(({ data }: TopState) => data);
+	const { sortBy } = useSelector(({ status }: TopState) => status);
 	const dispatch = useDispatch();
 
 	return (
@@ -47,12 +49,14 @@ export default function DataTable() {
 					<ChevronIcon sorted={sortBy} type="number" />
 				</div>
 			</li>
-			{table.map((sample: any, index: any) => (
+			{table.map((sample: DataSampleInterface, index: number) => (
 				<DataSample
 					sample={sample}
 					index={index}
 					// array.some is O(log n) whereas map/filter are O(n)
-					selected={graph.some((data: any) => data.name === sample.name)}
+					selected={graph.some(
+						(data: DataSampleInterface) => data.name === sample.name
+					)}
 				/>
 			))}
 		</ul>

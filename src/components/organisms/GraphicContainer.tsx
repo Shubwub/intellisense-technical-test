@@ -14,8 +14,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./GraphicContainer.module.scss";
 
+import { TopState } from "../../interfaces";
+
 export default function GraphicContainer() {
-	const { error, loading } = useSelector((state: any) => state.status);
+	const { error, loading } = useSelector(({ status }: TopState) => status);
 
 	const dispatch = useDispatch();
 
@@ -33,6 +35,7 @@ export default function GraphicContainer() {
 
 	useEffect(() => {
 		fetchData();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const graphicRouter = () => {
