@@ -8,8 +8,10 @@ import { setGraph } from "../../redux/actions";
 
 import styles from "./Graph.module.scss";
 
+import { DataSampleInterface, TopState } from "../../interfaces";
+
 export default function DataGraph() {
-	const { graph } = useSelector((state: any) => state.data);
+	const { graph } = useSelector(({ data }: TopState) => data);
 
 	const dispatch = useDispatch();
 
@@ -34,10 +36,10 @@ export default function DataGraph() {
 				credits: {
 					enabled: false,
 				},
-				series: graph.map((sample: any) => {
+				series: graph.map((sample: DataSampleInterface) => {
 					return {
 						type: "line",
-						data: sample.times.map((time: any, index: number) => {
+						data: sample.times.map((time: number, index: number) => {
 							return [time, sample.values[index]];
 						}),
 						name: sample.name,

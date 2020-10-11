@@ -4,12 +4,14 @@ import styles from "../molecules/Table.module.scss";
 import { useDispatch } from "react-redux";
 import { addData, removeData } from "../../redux/actions";
 
+import { DataSampleInterface } from "../../interfaces";
+
 export default function DataSample({
 	sample,
 	index,
 	selected,
 }: {
-	sample: any;
+	sample: DataSampleInterface;
 	index: number;
 	selected: boolean;
 }) {
