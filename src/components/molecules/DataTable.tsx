@@ -11,11 +11,11 @@ import { DataSampleInterface, TopState } from "../../interfaces";
 /**
  *  This is the component for displaying the table. Data for the table is
  *  fetched by the API and normalised to a particular object structure.
- * 
+ *
  *  This component also has reference to graph data so it can inform samples
  *  if they are present in the data. It was felt this was a more efficient use
  *  of state than having each sample have knowledge of all graph data.
- * 
+ *
  *  Clicking the sorting headers calls 2 dispatches. The first actually sorts
  *  the data in state so it is rendered in a different order. The second
  *  sets the "sortBy" property to keep track of how the data is currently
@@ -65,7 +65,7 @@ export default function DataTable() {
 			{table.map((sample: DataSampleInterface, index: number) => (
 				<DataSample
 					sample={sample}
-          key={index}
+					key={index}
 					// array.some is O(log n) whereas map/filter are O(n)
 					selected={graph.some(
 						(data: DataSampleInterface) => data.name === sample.name
