@@ -1,4 +1,9 @@
-export const GET_DATA: string = "GET_DATA";
+/**
+ *  This file is to avoid discrepancies in strings as these constants 
+ *  are used in both the action and reducers files.
+ */
+
+export const SET_DATA: string = "SET_DATA";
 export const SORT_DATA: string = "SORT_DATA";
 export const SET_SORT: string = "SET_SORT";
 export const ADD_TO_GRAPH: string = "ADD_TO_GRAPH";
