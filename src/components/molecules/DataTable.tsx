@@ -52,7 +52,8 @@ export default function DataTable() {
 			{table.map((sample: DataSampleInterface, index: number) => (
 				<DataSample
 					sample={sample}
-					index={index}
+          index={index}
+          key={index}
 					// array.some is O(log n) whereas map/filter are O(n)
 					selected={graph.some(
 						(data: DataSampleInterface) => data.name === sample.name

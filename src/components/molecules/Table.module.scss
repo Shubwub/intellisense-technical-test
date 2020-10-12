@@ -11,7 +11,7 @@
 	@media screen and (max-width: $medium) {
 		width: 100%;
 		max-height: 300px;
-  }
+	}
 }
 
 .leftTableCell {
@@ -52,10 +52,17 @@
 
 .tableRow {
 	display: flex;
+	border: none;
+  background-color: white;
+  width: 100%;
+  padding: 10px 0px;
+  font-size: 14px;
 	border-bottom: 1px solid $main-colour;
-	transition: ease-in-out 0.2s;
+  transition: ease-in-out 0.2s;
+  color: $gray;
 	cursor: pointer;
-	&:hover {
+	&:hover,
+	&:focus {
 		background-color: $main-colour;
 		color: white;
 		transition: ease-in-out 0.2s;
