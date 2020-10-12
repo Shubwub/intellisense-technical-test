@@ -57,6 +57,7 @@ export default function DataGraph() {
 						onClick={() => dispatch(setGraph([]))}
 						data-name="clearGraph"
 						id="clear-graph"
+						tabIndex={0}
 					>
 						clear graph
 					</button>

@@ -35,24 +35,30 @@ export default function GraphicContainer() {
 
 	useEffect(() => {
 		fetchData();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const graphicRouter = () => {
 		if (error) {
 			return (
-				<img
-					src={errorIcon}
-					className="error"
-					alt="Error collecting data. Please try again."
-					data-name="error"
-				/>
+				<main role="main">
+					<img
+						src={errorIcon}
+						className="error"
+						alt="Error collecting data. Please try again."
+						data-name="error"
+					/>
+				</main>
 			);
 		} else if (loading) {
-			return <PuffLoader size={150} color={"#68e0d8"} loading={loading} />;
+			return (
+				<main role="main">
+					<PuffLoader size={150} color={"#824FDF"} loading={loading} />
+				</main>
+			);
 		}
 		return (
-			<main className={styles.infographic}>
+			<main className={styles.infographic} role="main">
 				<DataTable />
 				<DataGraph />
 			</main>

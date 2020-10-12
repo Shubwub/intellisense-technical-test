@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import styles from "../molecules/Table.module.scss";
 
 import { useDispatch } from "react-redux";
@@ -16,29 +16,37 @@ export default function DataSample({
 	selected: boolean;
 }) {
 	const dispatch = useDispatch();
+	const ref = useRef<HTMLButtonElement>(null);
+
+	const handleClick = () => {
+		if (selected) {
+			dispatch(removeData(sample.name));
+			if (ref.current) ref.current.blur();
+		} else dispatch(addData(sample));
+	};
 
 	return (
-		<li
-			className={`${styles.tableRow} ${selected && styles.selectedRow}`}
-			key={index}
-			onClick={() => {
-				selected
-					? dispatch(removeData(sample.name))
-					: dispatch(addData(sample));
-			}}
-		>
-			<div
-				className={`${styles.tableData} ${styles.leftTableCell} ${styles.leftData}`}
-				data-name="sample-name"
+		<li>
+			<button
+				id={`${sample.name}-button`}
+				tabIndex={0}
+				onClick={handleClick}
+				ref={ref}
+				className={`${styles.tableRow} ${selected && styles.selectedRow}`}
 			>
-				{sample.name}
-			</div>
-			<div
-				className={`${styles.tableData} ${styles.rightTableCell}`}
-				data-name="sample-value"
-			>
-				{sample.values[sample.values.length - 1]}
-			</div>
+				<div
+					className={`${styles.tableData} ${styles.leftTableCell} ${styles.leftData}`}
+					data-name="sample-name"
+				>
+					{sample.name}
+				</div>
+				<div
+					className={`${styles.tableData} ${styles.rightTableCell}`}
+					data-name="sample-value"
+				>
+					{sample.values[sample.values.length - 1]}
+				</div>
+			</button>
 		</li>
 	);
 }
