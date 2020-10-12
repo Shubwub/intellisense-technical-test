@@ -84,7 +84,11 @@ The code provided attempts to fulfill all tasks as well as adding a few extra fe
     This project uses TypeScript throughout. Variables, functions, and parameters should be typed where possible. There are a number of custom interfaces for describing data returned from the API as well as various levels of the redux state.
 
   - ### ♿ Accessibility
+
     Accessibility for this project should be kept to at least a [**AA standard**][aa] (In compliance with the W3C Web Content Accessibility Guidelines) as best as posssible. aXe-react has been installed as a means of complying with these standards. Current warning can be viewed from the console when the application is being ran in development mode.
+
+  - ### 🐶 Husky
+    Husky pre-commit hooks are used to ensure breaking or poor-quality code is not commited to the git repo. The pre-commit hook script can be found in `.husky/_/pre-commit`. This scrippt will run the cypress tests as well as linting all tsx files.
 
 - ## 🧪 Testing
 
