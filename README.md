@@ -1,44 +1,99 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1 align="center" style="color: #824FDF">
+  Intellisense Technical Test ⛏️
+</h1>
 
-## Available Scripts
+<p align="center" style="font-size: 1.2rem;">
+  Querying data from a provided API and displaying as both a table and graph.
+</p>
 
-In the project directory, you can run:
+<hr />
 
-### `yarn start`
+This application uses an [**API**][a] provided by [**Intellisense.io**][i]. The specification for this tech test outlined 3 key goals:
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Create a single page application with a table and line graph
+- Access the data from the provided API
+- Allow different columns in the dataset to be selected for graphing
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+The code provided attempts to fulfill all tasks as well as adding a few extra features in an effort to provide a better user experience. A collection of planned features that didn't make it into the current build can likely be found on the [**issues tab of the github repo**][is].
 
-### `yarn test`
+[a]: https://reference.intellisense.io/thickenernn/v1/referencia
+[i]: https://www.intellisense.io/
+[is]: https://github.com/Shubwub/intellisense-technical-test/issues
+[at]: https://atomicdesign.bradfrost.com/chapter-2/
+[r]: https://redux.js.org/
+[c]: https://www.cypress.io/
+[aa]: https://www.w3.org/WAI/WCAG2AAA-Conformance.html
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- ## 📋 Requirements
 
-### `yarn build`
+  The requirements for running this application locally are the same as any standard `create-react-app` react application, of course with additional dependancies provided by npm. The currently supported browsers are Firefox and Chrome.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- ## 🎉 Installation and setup
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+  Once this repository is cloned, dependencies must be met through:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+  ```bash
+    npm i
+  ```
 
-### `yarn eject`
+  A local development server can then be spun up through
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+  ```bash
+    npm start
+  ```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- ## 📖 Documentation
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+  - ### 🚧 Structure
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+    This project uses React hooks for state management such as **useState** and **useEffect**. Functional components should be used where possible due to their reduced compile size and the phasing out of class-components by the react development team.
+    The project also tries to follow an [**atomic**][at] component structure. The basic idea being to split components into organisms, molecules and atoms. organisms being made of many molecules, and molecules being made of many atoms.
 
-## Learn More
+  - ### ⚙️ Redux
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+    App-wide state management is done through [**Redux**][r]. The structure of which is as follows:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+    ```JSON
+      "data": {
+        "table": [
+          {
+            "name": "string",
+            "times": "number",
+            "values": "number",
+          }
+        ],
+        "graph": [
+          {
+            "name": "string",
+            "times": "number",
+            "values": "number",
+          },
+        ]
+      },
+      "status": {
+        "loading": "boolean",
+        "error": "boolean",
+        "sortBy": "string"
+      }
+    ```
+
+    Data stored under `table` is what is returned from the API and is rendered in the table. Graph data should be a subset of that stored under `data`. Items under `status` should ideally refer to the `state` of the app - as opposed to data being used and presented to users.
+
+  - ### 🏷️ TypeScript
+
+    This project uses TypeScript throughout. Variables, functions, and parameters should be typed where possible. There are a number of custom interfaces for describing data returned from the API as well as various levels of the redux state.
+
+  - ### ♿ Accessibility
+    Accessibility for this project should be kept to at least a [**AA standard**][aa] (In compliance with the W3C Web Content Accessibility Guidelines) as best as posssible. aXe-react has been installed as a means of complying with these standards. Current warning can be viewed from the console when the application is being ran in development mode.
+
+- ## 🧪 Testing
+
+  This project uses [**Cypress**][c] for it's testing. Cypress was chosen as it's what's most familiar and better reflects a user journey through an application.
+
+  Tests can be found in `/cypress/integration`. Elements should be selected using data-name attributes. This is the apporach recommended by Cypress as it's least intrusive to the DOM.
+
+  To run the test suite run
+
+  ```bash
+    npm test
+  ```
