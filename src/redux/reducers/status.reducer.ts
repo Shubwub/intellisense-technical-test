@@ -17,6 +17,10 @@ const reducer = (state = INITIAL_STATE, action: any): StatusState => {
       return {
         ...state, error: action.payload,
       };
+
+    /**
+     *  Takes a string and sets the current sorting method.
+     */
     case SET_SORT:
       return { ...state, sortBy: action.payload }
     default: return state;

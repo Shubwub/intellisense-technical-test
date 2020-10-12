@@ -10,11 +10,23 @@ import styles from "./Graph.module.scss";
 
 import { DataSampleInterface, TopState } from "../../interfaces";
 
+/**
+ *  This is the component for displaying the graph. Highcharts
+ *  (https://www.highcharts.com/) is currently used due to
+ *  it's familiarity and ease of setup.
+ *
+ *  The data used for the graph should be a subset of all
+ *  available data.
+ */
 export default function DataGraph() {
 	const { graph } = useSelector(({ data }: TopState) => data);
 
 	const dispatch = useDispatch();
 
+	/* These options are conditional as if there is no graph data
+	 * it won't be able to access the times property and throw an
+	 * error.
+	 */
 	const options: Highcharts.Options = graph.length
 		? {
 				title: {
@@ -37,6 +49,9 @@ export default function DataGraph() {
 					enabled: false,
 				},
 				series: graph.map((sample: DataSampleInterface) => {
+					/* The data is mapped like this to tie data to it's
+					 * equivelant time entry.
+					 */
 					return {
 						type: "line",
 						data: sample.times.map((time: number, index: number) => {

@@ -5,17 +5,23 @@ import { PuffLoader } from "react-spinners";
 import errorIcon from "../../assets/images/error.svg";
 
 import { getData } from "../../services/api";
-import {
-	getData as dispatchData,
-	setLoading,
-	setError,
-} from "../../redux/actions/index";
+import { setData, setLoading, setError } from "../../redux/actions/index";
 import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./GraphicContainer.module.scss";
 
 import { TopState } from "../../interfaces";
 
+/**
+ *  This is essentially the top-level component (aside form App) for the app.
+ *  This component acts as a logical wrapper to the table and graph
+ *  components.
+ *
+ *  Upon render, this component will attempt to fetch the data from the API.
+ *  Whilst this is happening a loading state will be in place - loading a
+ *  spinner. After the request has resolved, if it throws an error - an error
+ *  component will be shown, otherwise it will render the table and graph.
+ */
 export default function GraphicContainer() {
 	const { error, loading } = useSelector(({ status }: TopState) => status);
 
@@ -25,7 +31,7 @@ export default function GraphicContainer() {
 		try {
 			dispatch(setLoading(true));
 			const data = await getData();
-			dispatch(dispatchData(data));
+			dispatch(setData(data));
 			dispatch(setLoading(false));
 		} catch (e) {
 			dispatch(setLoading(false));
@@ -33,6 +39,9 @@ export default function GraphicContainer() {
 		}
 	};
 
+	/**
+	 *  Attempt to fetch data from API on mount
+	 */
 	useEffect(() => {
 		fetchData();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
